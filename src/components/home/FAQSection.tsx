@@ -1,10 +1,9 @@
-// === بداية قسم: تصدير المكون ===
+// === بداية قسم: التصدير ===
 import React, { useState } from 'react';
 import { Plus, Minus, ChevronDown } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-// === نهاية قسم: تصدير المكون ===
 
-// === بداية قسم: الأنواع ===
+// === الأنواع (كما هي، بدون تغيير) ===
 interface FAQ {
   id: number;
   question: string;
@@ -14,12 +13,11 @@ interface FAQ {
 interface FAQCategory {
   id: number;
   title: string;
-  icon: string;
+  // ✅ icon removed — no icons used anywhere
   faqs: FAQ[];
 }
-// === نهاية قسم: الأنواع ===
 
-// === بداية قسم: المكون الرئيسي ===
+// === المكون: FAQSection — v2 — Ultra-Elegant Vertical Layout ===
 const FAQSection: React.FC = () => {
   const { t } = useTranslation();
 
@@ -35,16 +33,16 @@ const FAQSection: React.FC = () => {
     setOpenFAQ(openFAQ === id ? null : id);
   };
 
+  // ✅ البيانات كما هي — فقط حُذفت حقول `icon`
   const faqCategories: FAQCategory[] = [
     {
       id: 1,
       title: 'الطلبات والتوصيل والشحن',
-      icon: '🚚',
       faqs: [
         {
           id: 1,
           question: 'كم يستغرق توصيل الطلب؟',
-          answer: 'داخل المدن الرئيسية عادة 1–3 أيام عمل، وخارجها 3–7 أيام. الشحن الدولي يستغرق 7–14 يوم عمل حسب الوجهة وشركة الشحن. يمكنك تتبُّع طلبك من صفحة الطلبات.',
+          answer: 'داخل المدن الرئيسية عادة 1–3 أيام عمل، وخارجها 3–7 أيام. الشحن الدولي يستغرق 7–14 يوم عمل حسب الوجهة وشركة الشحن. يمكنك تتبُّع طلبك من صفحة الطلبات.',
         },
         {
           id: 2,
@@ -61,7 +59,6 @@ const FAQSection: React.FC = () => {
     {
       id: 2,
       title: 'الاستبدال والاسترجاع',
-      icon: '🔁',
       faqs: [
         {
           id: 4,
@@ -83,7 +80,6 @@ const FAQSection: React.FC = () => {
     {
       id: 3,
       title: 'الإكسسوارات والأصالة والجودة',
-      icon: '🌸',
       faqs: [
         {
           id: 7,
@@ -105,7 +101,6 @@ const FAQSection: React.FC = () => {
     {
       id: 4,
       title: 'الدفع والعروض',
-      icon: '💳',
       faqs: [
         {
           id: 10,
@@ -127,7 +122,6 @@ const FAQSection: React.FC = () => {
     {
       id: 5,
       title: 'الهدايا والتغليف',
-      icon: '🎁',
       faqs: [
         {
           id: 13,
@@ -149,7 +143,6 @@ const FAQSection: React.FC = () => {
     {
       id: 6,
       title: 'نصائح الاستخدام والحفظ',
-      icon: '✨',
       faqs: [
         {
           id: 16,
@@ -171,89 +164,147 @@ const FAQSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-10 sm:py-12 bg-white" data-section="faq">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      className="py-16 sm:py-20 bg-gradient-to-b from-white to-[#fff9f7] relative overflow-hidden"
+      data-section="faq"
+      aria-labelledby="faq-heading"
+    >
+      {/* ✨ عنصر زخرفي خفيف — خط ناعم عمودي يُوحّد التسلسل */}
+      <div 
+        className="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-transparent via-[#d9a890]/20 to-transparent transform -translate-x-1/2 pointer-events-none"
+        aria-hidden="true"
+      />
+
+      <div className="max-w-4xl mx-auto px-6 sm:px-8">
         
-        {/* === العنوان الرئيسي — أسود، مع لمسة بني في الخط === */}
-        <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0A2A55]">
+        {/* === العنوان الرئيسي — فاخر، بتركيز بصري على اللون #d9a890 === */}
+        <div className="text-center mb-16 relative">
+          <h2 
+            id="faq-heading"
+            className="text-3xl sm:text-4xl font-light tracking-tight text-[#0A2A55]"
+          >
             {t('home.faq.frequent_questions', { defaultValue: 'الأسئلة الشائعة' })}
           </h2>
- <div className="h-1 w-24 bg-[#c18c78] rounded-full mx-auto mt-3"></div>
-          <p className="text-gray-700 mt-4 max-w-3xl mx-auto leading-relaxed">
-            {t('home.faq.subtitle', { 
-              defaultValue: 'إجابات منظمة حول الطلبات والشحن والاستبدال والإكسسوارات' 
+          <div className="mt-5 w-24 h-0.5 mx-auto bg-[#d9a890] rounded-full"></div>
+          <p className="mt-6 text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+            {t('home.faq.subtitle', {
+              defaultValue: 'إجابات منظمة حول الطلبات والشحن والاستبدال والإكسسوارات',
             })}
           </p>
         </div>
 
-        {/* === الفئات — نظيفة، بدون حركات، مع لون بني خفيف في الأسئلة المفتوحة فقط === */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {/* === القائمة العمودية الرتيبة — بدون شبكات، بدون أيقونات، فقط أناقة === */}
+        <div className="space-y-10">
           {faqCategories.map((category) => (
             <div 
               key={category.id} 
-              className="border border-gray-200 rounded-lg overflow-hidden shadow-sm"
+              className="relative group"
             >
-              {/* --- رأس الفئة --- */}
+              {/* --- خط الاتصال الرأسي (جزئي، فقط عند الفئة المفتوحة أو المجاورة) --- */}
+              {openCategory === category.id && (
+                <div 
+                  className="absolute left-0 top-0 w-0.5 h-full bg-[#d9a890] rounded-full opacity-50"
+                  aria-hidden="true"
+                />
+              )}
+
+              {/* --- رأس الفئة — نحيف، أنيق، مع إشارة بصرية لطيفة عند التمرير/Focus --- */}
               <button
                 onClick={() => toggleCategory(category.id)}
-                className="w-full px-5 py-4 flex items-center justify-between bg-white text-left"
+                className={`w-full text-left py-4 px-6 rounded-xl transition-all duration-400
+                  ${openCategory === category.id 
+                    ? 'bg-white border border-[#d9a890]/20 shadow-sm' 
+                    : 'bg-transparent hover:bg-[#fdf8f6]'}
+                  focus:outline-none focus:ring-2 focus:ring-[#d9a890]/30`}
+                aria-expanded={openCategory === category.id}
+                aria-controls={`faq-category-${category.id}`}
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-xl">{category.icon}</span>
-                  <h3 className="font-semibold text-[#0A2A55]">{category.title}</h3>
+                <div className="flex items-center justify-between">
+                  <span 
+                    className={`text-lg font-medium tracking-wide transition-colors duration-300
+                      ${openCategory === category.id 
+                        ? 'text-[#0A2A55]' 
+                        : 'text-gray-800 group-hover:text-[#0A2A55]'}`}
+                  >
+                    {category.title}
+                  </span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#d9a890] transform transition-transform duration-300
+                      ${openCategory === category.id ? 'rotate-180' : ''}`}
+                  />
                 </div>
-                <ChevronDown
-                  className={`w-5 h-5 text-gray-500 transition-transform ${
-                    openCategory === category.id ? 'rotate-180 text-[#592a26]' : ''
-                  }`}
-                />
               </button>
 
-              {/* --- الأسئلة (إن كانت الفئة مفتوحة) --- */}
+              {/* --- محتوى الفئة (الأسئلة) — يظهر بسلاسة عند الفتح --- */}
               {openCategory === category.id && (
-                <div className="border-t border-gray-100 bg-gray-50">
-                  <div className="p-4 space-y-3">
-                    {category.faqs.map((faq) => (
-                      <div key={faq.id} className="border-b border-gray-100 last:border-0 pb-3 last:pb-0">
-                        <button
-                          onClick={() => toggleFAQ(faq.id)}
-                          className="w-full flex justify-between items-start text-left"
+                <div 
+                  id={`faq-category-${category.id}`}
+                  className="mt-4 pl-6 border-l-2 border-[#d9a890]/20 space-y-5"
+                  aria-live="polite"
+                >
+                  {category.faqs.map((faq) => (
+                    <div 
+                      key={faq.id}
+                      className={`transition-all duration-400 ${
+                        openFAQ === faq.id ? 'opacity-100' : 'opacity-95'
+                      }`}
+                    >
+                      <button
+                        onClick={() => toggleFAQ(faq.id)}
+                        className={`w-full text-left py-3 px-5 rounded-lg flex justify-between items-start
+                          transition-colors duration-300
+                          ${openFAQ === faq.id 
+                            ? 'bg-[#fdf8f6] shadow-sm' 
+                            : 'hover:bg-[#fefcfa]'}`}
+                        aria-expanded={openFAQ === faq.id}
+                        aria-controls={`faq-answer-${faq.id}`}
+                      >
+                        <span 
+                          className={`text-base font-normal text-gray-800 leading-relaxed
+                            ${openFAQ === faq.id 
+                              ? 'font-medium text-[#0A2A55]' 
+                              : 'group-hover:text-gray-900'}`}
                         >
-                          <span className={`text-sm sm:text-base flex-1 pr-2 ${
-                            openFAQ === faq.id ? 'font-semibold text-[#592a26]' : 'text-gray-800'
-                          }`}>
-                            {faq.question}
-                          </span>
-                          <div className="flex-shrink-0 ml-2">
-                            {openFAQ === faq.id ? (
-                              <Minus className="w-4 h-4 text-[#592a26]" />
-                            ) : (
-                              <Plus className="w-4 h-4 text-[#592a26]" />
-                            )}
-                          </div>
-                        </button>
+                          {faq.question}
+                        </span>
+                        <span className="ml-3 flex-shrink-0">
+                          {openFAQ === faq.id ? (
+                            <Minus className="w-4 h-4 text-[#d9a890]" />
+                          ) : (
+                            <Plus className="w-4 h-4 text-[#d9a890]" />
+                          )}
+                        </span>
+                      </button>
 
-                        {openFAQ === faq.id && (
-                          <div className="mt-2">
-                            <p className="text-gray-700 text-sm leading-relaxed">
-                              {faq.answer}
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                      {openFAQ === faq.id && (
+                        <div
+                          id={`faq-answer-${faq.id}`}
+                          className="mt-3 ml-10 pr-2"
+                          role="region"
+                        >
+                          <p className="text-gray-600 leading-relaxed font-light text-sm sm:text-base">
+                            {faq.answer}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
           ))}
         </div>
 
+        {/* ✨ لمسة نهائية: زخرفة خفيفة في الأسفل — لتعزيز الطابع الراقي */}
+        <div 
+          className="mt-20 text-center opacity-10"
+          aria-hidden="true"
+        >
+          <div className="w-20 h-px bg-[#d9a890] mx-auto"></div>
+        </div>
       </div>
     </section>
   );
 };
-// === نهاية قسم: المكون الرئيسي ===
 
 export default FAQSection;
