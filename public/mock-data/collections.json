@@ -1,0 +1,39 @@
+[
+  {
+    "id": 5001,
+    "name": { "ar": "آخر العروض", "en": "Latest Offers" },
+    "description_ar": "عروض حصرية على الخواتم والأساور والقلائد والأقراط. اختيارات منتقاة بعناية مع تخفيضات محدودة المدة وباقات هدايا جاهزة.",
+    "description_en": "Exclusive deals on rings, bracelets, necklaces, and earrings. Curated picks with limited-time savings and ready-to-gift bundles.",
+    "type": "manual",
+    "isActive": true,
+    "image": "/images/collections/last-offers.jpg",
+    "products": [
+      20001,
+      20004,
+      21001,
+      21003,
+      22001,
+      22004,
+      23001,
+      23004,
+      24001,
+      24004
+    ]
+  },
+  {
+    "id": 5002,
+    "name": { "ar": "أحدث المنتجات", "en": "Latest Products" },
+    "description_ar": "أحدث الإصدارات من تشكيلتنا: تصميمات جديدة من الخواتم والأساور والقلائد، ترند الموسم بخامات عالية الجودة.",
+    "description_en": "Newest arrivals from our collection: fresh designs in rings, bracelets, and necklaces crafted with high-quality materials.",
+    "type": "manual",
+    "isActive": true,
+    "image": "/images/collections/white-friday.jpg",
+    "products": [
+      20007,
+      21002,
+      22005,
+      23005,
+      24005
+    ]
+  }
+]
