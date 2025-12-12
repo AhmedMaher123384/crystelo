@@ -48,9 +48,12 @@ i18n
     },
     
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      // نجعل العربية هي الافتراضية عبر تفضيل وسم الـ HTML قبل المتصفّح
+      order: ['localStorage', 'htmlTag', 'navigator'],
       caches: ['localStorage'],
     },
+    supportedLngs: ['ar', 'en'],
+    nonExplicitSupportedLngs: true,
     
     react: {
       useSuspense: false,
