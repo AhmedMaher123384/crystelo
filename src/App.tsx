@@ -464,7 +464,7 @@ const App: React.FC = () => {
         .find(p => p.id === productId);
       
       if (!product) {
-        smartToast.frontend.error('المنتج غير موجود');
+        // لا تُظهر أي توست مرتبط بالإضافة للسلة
         return;
       }
       
@@ -472,7 +472,7 @@ const App: React.FC = () => {
       const productImage = product.mainImage;
       
       if (!product.isAvailable) {
-        smartToast.frontend.error('الكمية المطلوبة غير متوفرة في المخزون');
+        // لا تُظهر أي توست مرتبط بالإضافة للسلة
         return;
       }
       
@@ -487,7 +487,7 @@ const App: React.FC = () => {
       }
     } catch (error) {
       console.error('Error adding to cart:', error);
-      smartToast.frontend.error('فشل في إضافة المنتج للسلة');
+      // لا تُظهر أي توست مرتبط بالإضافة للسلة
     }
   };
 

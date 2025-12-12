@@ -38,7 +38,7 @@
     "name": " السلاسل",
     "name_en": "Necklaces ",
     "description": "قدّمنا لك تشكيلة راقية من السلاسل بتفاصيل أنيقة وخامات ممتازة، تعطيك لمسة فخامة وتكمّل أي لوك بشكل جذّاب ومرتب.",
-    "categoryType": "regular",
+    "categoryType": "regular", 
     "parentId": null,
     "isActive": true,
     "order": 5,

@@ -450,7 +450,7 @@ const ProductDetail: React.FC = () => {
       );
     } catch (error) {
       console.error('Error adding to cart:', error);
-      smartToast.frontend.error(t('add_to_cart_error'));
+      // لا تُظهر أي توست مرتبط بالإضافة للسلة
     } finally {
       setAddingToCart(false);
     }

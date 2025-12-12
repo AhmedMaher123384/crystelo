@@ -498,8 +498,8 @@ const Checkout: React.FC = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center" dir="rtl">
         <div className="bg-white rounded-2xl shadow-md p-12 sm:p-16 text-center max-w-md w-full mx-4">
-          <div className="w-20 h-20 mx-auto mb-6 bg-[#592a26]/10 rounded-full flex items-center justify-center">
-            <ShoppingCart className="w-10 h-10 text-[#592a26]" />
+          <div className="w-20 h-20 mx-auto mb-6 bg-[#d9a890]/10 rounded-full flex items-center justify-center">
+            <ShoppingCart className="w-10 h-10 text-[#d9a890]" />
           </div>
           <h2 className="text-2xl font-black text-[#0A2A55] mb-4">سلة التسوق فارغة</h2>
           <p className="text-gray-700 text-lg mb-8">
@@ -507,7 +507,7 @@ const Checkout: React.FC = () => {
           </p>
           <button
             onClick={() => navigate('/products')}
-            className="inline-flex items-center justify-center px-8 py-4 bg-[#592a26] text-white font-bold rounded-xl hover:bg-[#4a221f] min-w-[200px]"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[#d9a890] text-white font-bold rounded-xl hover:opacity-90 min-w-[200px]"
           >
             تسوق الآن
           </button>
@@ -520,7 +520,7 @@ const Checkout: React.FC = () => {
   return (
     <section className="min-h-screen bg-gray-50 py-8 sm:py-12" dir="rtl">
       {/* Header */}
-      <div className="bg-[#592a26] text-white">
+      <div className="bg-[#d9a890] text-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-3">
@@ -598,7 +598,7 @@ const Checkout: React.FC = () => {
                                 </span>{' '}
                                 {Array.isArray(opt.value) ? opt.value.join(', ') : opt.value}
                                 {opt.priceModifier > 0 && (
-                                  <span className="text-[#592a26] mr-1">
+                                  <span className="text-[#d9a890] mr-1">
                                     (+{opt.priceModifier} {getCurrentCurrencySymbol()})
                                   </span>
                                 )}
@@ -613,7 +613,7 @@ const Checkout: React.FC = () => {
                             {item.addOns.map((addon, idx) => (
                               <div key={idx} className="text-xs text-gray-600">
                                 <span>{getLocalizedAddOnContent('name', addon)}</span>
-                                <span className="text-[#592a26] mr-1">
+                                <span className="text-[#d9a890] mr-1">
                                   (+{addon.price} {getCurrentCurrencySymbol()})
                                 </span>
                               </div>
@@ -631,7 +631,7 @@ const Checkout: React.FC = () => {
                               const addons = item.addOnsPrice || 0;
                               return (base + opts + prodOpts + addons) * item.quantity;
                             })()}
-                            className="font-black text-[#592a26] text-lg"
+                            className="font-black text-[#d9a890] text-lg"
                           />
                         </div>
                       </div>
@@ -648,7 +648,7 @@ const Checkout: React.FC = () => {
                     value={couponCode}
                     onChange={(e) => setCouponCode(e.target.value)}
                     placeholder="كود الخصم"
-                    className="flex-1 px-4 py-3 bg-white border border-[#592a26]/30 rounded-lg text-[#592a26] placeholder-[#592a26]/50 focus:outline-none focus:ring-2 focus:ring-[#592a26] text-sm"
+                    className="flex-1 px-4 py-3 bg-white border border-[#d9a890]/30 rounded-lg text-[#d9a890] placeholder-[#d9a890]/50 focus:outline-none focus:ring-2 focus:ring-[#d9a890] text-sm"
                     disabled={!!appliedCoupon}
                   />
                   {appliedCoupon ? (
@@ -662,7 +662,7 @@ const Checkout: React.FC = () => {
                     <button
                       onClick={() => validateCoupon(couponCode)}
                       disabled={!couponCode.trim() || couponValidating}
-                      className="px-4 py-3 bg-[#592a26] hover:bg-[#4a221f] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed text-white rounded-lg font-bold text-sm"
+                      className="px-4 py-3 bg-[#d9a890] hover:opacity-90 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed text-white rounded-lg font-bold text-sm"
                     >
                       {couponValidating ? '...' : 'تطبيق'}
                     </button>
@@ -694,7 +694,7 @@ const Checkout: React.FC = () => {
                   <span>رسوم التوصيل</span>
                   <PriceDisplay price={getShippingPrice()} />
                 </div>
-                <div className="flex justify-between font-black text-[#592a26] text-xl pt-2 border-t border-gray-200">
+                <div className="flex justify-between font-black text-[#d9a890] text-xl pt-2 border-t border-gray-200">
                   <span>المجموع الكلي</span>
                   <PriceDisplay price={getFinalTotal()} />
                 </div>
@@ -718,7 +718,7 @@ const Checkout: React.FC = () => {
                     name="name"
                     value={customerInfo.name}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#592a26] focus:border-[#592a26] text-gray-800"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d9a890] focus:border-[#d9a890] text-gray-800"
                     required
                   />
                 </div>
@@ -731,7 +731,7 @@ const Checkout: React.FC = () => {
                       name="phone"
                       value={customerInfo.phone}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#592a26] focus:border-[#592a26] text-gray-800"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d9a890] focus:border-[#d9a890] text-gray-800"
                       required
                     />
                   </div>
@@ -745,7 +745,7 @@ const Checkout: React.FC = () => {
                       name="email"
                       value={customerInfo.email}
                       onChange={handleInputChange}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#592a26] focus:border-[#592a26] text-gray-800"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d9a890] focus:border-[#d9a890] text-gray-800"
                     />
                   </div>
                 </div>
@@ -758,7 +758,7 @@ const Checkout: React.FC = () => {
                     value={customerInfo.address}
                     onChange={handleInputChange}
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#592a26] focus:border-[#592a26] text-gray-800 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d9a890] focus:border-[#d9a890] text-gray-800 resize-none"
                     required
                   />
                   <p className="text-gray-600 text-sm mt-1">يرجى كتابة العنوان الكامل لتوصيل دقيق</p>
@@ -770,7 +770,7 @@ const Checkout: React.FC = () => {
                     value={customerInfo.notes}
                     onChange={handleInputChange}
                     rows={2}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#592a26] focus:border-[#592a26] text-gray-800 resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#d9a890] focus:border-[#d9a890] text-gray-800 resize-none"
                     placeholder="مثال: بالقرب من مسجد..., الطابق الثالث بدون مصعد"
                   />
                 </div>
@@ -796,15 +796,15 @@ const Checkout: React.FC = () => {
                       onClick={() => setSelectedRegion(region)}
                       className={`p-4 border-2 rounded-xl cursor-pointer ${
                         selectedRegion?._id === region._id
-                          ? 'border-[#592a26] bg-[#592a26]/5'
-                          : 'border-gray-200 hover:border-[#592a26]/40'
+                          ? 'border-[#d9a890] bg-[#d9a890]/5'
+                          : 'border-gray-200 hover:border-[#d9a890]/40'
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                             selectedRegion?._id === region._id
-                              ? 'border-[#592a26] bg-[#592a26]'
+                              ? 'border-[#d9a890] bg-[#d9a890]'
                               : 'border-gray-300'
                           }`}>
                             {selectedRegion?._id === region._id && (
@@ -813,7 +813,7 @@ const Checkout: React.FC = () => {
                           </div>
                           <span className="font-medium text-[#0A2A55]">{region.regionName}</span>
                         </div>
-                        <span className="font-black text-[#592a26]">
+                        <span className="font-black text-[#d9a890]">
                           <PriceDisplay price={region.price} />
                         </span>
                       </div>
@@ -836,14 +836,14 @@ const Checkout: React.FC = () => {
                     onClick={() => handlePaymentMethodSelection(method.id)}
                     className={`p-4 border-2 rounded-xl cursor-pointer ${
                       selectedPaymentMethod === method.id
-                        ? 'border-[#592a26] bg-[#592a26]/5'
-                        : 'border-gray-200 hover:border-[#592a26]/40'
+                        ? 'border-[#d9a890] bg-[#d9a890]/5'
+                        : 'border-gray-200 hover:border-[#d9a890]/40'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                         selectedPaymentMethod === method.id
-                          ? 'border-[#592a26] bg-[#592a26]'
+                          ? 'border-[#d9a890] bg-[#d9a890]'
                           : 'border-gray-300'
                       }`}>
                         {selectedPaymentMethod === method.id && (
@@ -865,7 +865,7 @@ const Checkout: React.FC = () => {
               <button
                 onClick={handlePlaceOrder}
                 disabled={placing || cartItems.length === 0}
-                className="w-full bg-[#592a26] hover:bg-[#4a221f] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-black py-4 px-6 rounded-xl transition-colors text-lg"
+                className="w-full bg-[#d9a890] hover:opacity-90 disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed text-white font-black py-4 px-6 rounded-xl transition-colors text-lg"
               >
                 {placing ? (
                   <div className="flex items-center justify-center gap-2">

@@ -25,10 +25,10 @@ interface LiveSearchProps {
   onClose?: () => void;
   className?: string;
   triggerVariant?: 'icon' | 'bar';
-  
+  appearance?: 'light' | 'dark';
 }
 
-const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', triggerVariant = 'icon' }) => {
+const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', triggerVariant = 'icon', appearance = 'dark' }) => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<Product[]>([]);
@@ -176,10 +176,10 @@ const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', trigge
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="w-full relative flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/15 transition-all duration-300 group"
+          className={`w-full relative flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all duration-300 group ${appearance === 'light' ? 'bg-[#fdf9f7] border border-[#d9a890]/30 text-gray-800 hover:border-[#d9a890]/50' : 'bg-white/10 border border-white/20 text-white/80 hover:text-white hover:bg-white/15'}`}
         >
-          <Search size={18} className="text-white/80" />
-          <span className="text-sm">{t('search_placeholder', 'ابحث عن المنتجات...')}</span>
+          <Search size={18} className={appearance === 'light' ? 'text-[#d9a890]' : 'text-white/80'} />
+          <span className={`text-sm ${appearance === 'light' ? 'text-gray-700' : ''}`}>{t('search_placeholder', 'ابحث عن المنتجات...')}</span>
           <div className="absolute inset-0 rounded-2xl bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </button>
       )}
@@ -196,7 +196,7 @@ const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', trigge
                 value={searchQuery}
                 onChange={handleInputChange}
                 placeholder={t('search_placeholder', 'البحث عن المنتجات...')}
- className="w-full px-6 py-4 pl-14 pr-12 text-gray-900 placeholder-gray-400 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#c18c78]/30 focus:border-[#c18c78]/40 transition-all duration-300 shadow-lg text-lg text-right"
+                className="w-full px-6 py-4 pl-14 pr-12 text-gray-900 placeholder-gray-500 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#d9a890]/30 focus:border-[#d9a890]/40 transition-all duration-300 shadow-lg text-lg text-right"
                 autoFocus
               />
               <Search className="absolute right-5 top-1/2 transform -translate-y-1/2 text-gray-500 w-6 h-6" />
@@ -215,7 +215,7 @@ const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', trigge
               >
                  {isLoading ? (
                    <div className="p-8 text-center">
- <div className="inline-block w-8 h-8 border-4 border-[#c18c78] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                     <div className="inline-block w-8 h-8 border-4 border-[#d9a890] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
                      <p className="text-gray-700 font-medium text-sm">{t('live_search.loading', 'جاري التحميل...')}</p>
                    </div>
                  ) : searchResults.length > 0 ? (
@@ -254,16 +254,16 @@ const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', trigge
                              
                              {/* معلومات المنتج المحسنة */}
                              <div className="flex-1 min-w-0">
- <h4 className="font-semibold text-gray-900 truncate text-right mb-1 group-hover/item:text-[#c18c78] transition-colors duration-200 text-sm">
-                                 {product.name}
-                               </h4>
+                                <h4 className="font-semibold text-gray-900 truncate text-right mb-1 group-hover/item:text-[#d9a890] transition-colors duration-200 text-sm">
+                                  {product.name}
+                                </h4>
                                {product.category?.name && (
                                  <p className="text-xs text-gray-500 truncate text-right mb-1">
                                    {product.category.name}
                                  </p>
                                )}
                                <div className="flex items-center justify-end">
- <span className="text-xs font-semibold text-white bg-gradient-to-r from-[#d9a890] to-[#c18c78] px-2 py-1 rounded-lg">
+                                    <span className="text-xs font-semibold text-black bg-[#d9a890] px-2 py-1 rounded-lg">
                                     <PriceDisplay price={product.price} variant="inverse" />
                                   </span>
                                </div>
@@ -272,7 +272,7 @@ const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', trigge
                              {/* سهم الانتقال */}
                               <div className="opacity-0 group-hover/item:opacity-100 transition-all duration-300 transform group-hover/item:translate-x-1">
  <div className="w-6 h-6 rounded-lg bg-[#d9a890]/10 flex items-center justify-center">
- <svg className="w-3 h-3 text-[#c18c78]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <svg className="w-3 h-3 text-[#d9a890]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                  </svg>
                                </div>
@@ -287,7 +287,7 @@ const LiveSearch: React.FC<LiveSearchProps> = ({ onClose, className = '', trigge
                         <div className="p-3 border-t border-gray-100">
                           <button
                             onClick={handleViewAll}
- className="w-full py-2.5 px-4 rounded-xl font-semibold text-white transition-all duration-300 relative overflow-hidden group/btn text-sm bg-[#d9a890] border border-[#c18c78] hover:bg-[#c18c78]"
+                            className="w-full py-2.5 px-4 rounded-xl font-semibold text-black transition-all duration-300 relative overflow-hidden group/btn text-sm bg-[#d9a890] hover:opacity-90"
                           >
                             {/* تأثير الإضاءة عند التمرير */}
                             <div className="absolute inset-0 opacity-0 group-hover/btn:opacity-20 transition-opacity duration-300 bg-white" />

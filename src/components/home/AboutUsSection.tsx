@@ -17,7 +17,8 @@ interface Category {
 }
 
 const AboutUsSection: React.FC = () => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
+  const isArabic = i18n.language === 'ar';
   const containerRef = useRef<HTMLDivElement>(null);
   const [categories, setCategories] = useState<Category[]>(() => {
     try {
@@ -220,22 +221,22 @@ const AboutUsSection: React.FC = () => {
         <div className="mb-12 md:mb-14 animate-fade-in-up">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-black">آخر العروض</h2>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-black">{isArabic ? 'آخر العروض' : 'Latest Offers'}</h2>
               <div className="h-1 w-20 bg-[#592a26] rounded-full mt-2"></div>
             </div>
           </div>
-          <ArabicCollectionList arabicName="آخر العروض" limit={5} />
+          <ArabicCollectionList arabicName="آخر العروض" limit={5} className="mb-10" />
         </div>
 
         {/* الجمعة البيضاء */}
         <div className="mb-10 md:mb-12 animate-fade-in-up animate-delay-1">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-black">أحدث المنتجات</h2>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-black">{isArabic ? 'أحدث المنتجات' : 'Latest Products'}</h2>
               <div className="h-1 w-20 bg-[#592a26] rounded-full mt-2"></div>
             </div>
           </div>
-          <ArabicCollectionList arabicName="أحدث المنتجات" limit={5} />
+          <ArabicCollectionList arabicName="أحدث المنتجات" limit={5} className="mb-10" />
         </div>
 
         {/* صورة الهيرو — الآن بتأثير مُحسّن */}
@@ -262,13 +263,13 @@ const AboutUsSection: React.FC = () => {
                 key={category.id} 
                 className={`animate-fade-in-up animate-delay-${(idx % 5) + 1}`}
               >
-                <div className="flex items-end justify-between mb-4">
+                <div className={`flex items-end justify-between mb-4 ${isArabic ? 'flex-row-reverse' : ''}`}>
                   <h3 className="text-xl md:text-2xl font-extrabold text-black">{name}</h3>
                   <Link 
                     to={to} 
                     className="text-[#592a26] font-medium text-sm md:text-base hover:text-[#d9a890] transition-colors"
                   >
-                    عرض الكل
+                    {i18n.language === 'ar' ? 'عرض الكل' : 'explore more'}
                   </Link>
                 </div>
                 <CategoryProductsPreview categoryId={category.id} limit={5} />

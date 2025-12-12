@@ -105,19 +105,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' })
     if (product.hasRequiredOptions) {
       const productPath = `/product/${createProductSlug(product.id, getLocalizedContent('name'))}`;
       navigate(productPath);
-      smartToast.frontend.info(t('product.select_options_first', { name: getLocalizedContent('name') }));
       return;
     }
     try {
       const success = await addToCartUnified(product.id, getLocalizedContent('name'), quantity);
-      if (success) {
-        smartToast.frontend.success(t('product.added_to_cart', { name: getLocalizedContent('name') }));
-      } else {
-        smartToast.frontend.error(t('product.add_to_cart_failed'));
-      }
+      // لا تُظهر أي توست عند الإضافة للسلة وفق المطلوب
     } catch (error) {
       console.error('Error adding product to cart:', error);
-      smartToast.frontend.error(t('product.add_to_cart_error'));
+      // لا تُظهر أي توست عند الإضافة للسلة وفق المطلوب
     }
   };
 
@@ -213,7 +208,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' })
                 </button>
               </div>
 
-              <p className="text-gray-600 text-sm mt-1.5 line-clamp-2 leading-relaxed break-words">
+              <p className="text-gray-600 text-sm mt-1.5 line-clamp-1 leading-relaxed break-words">
                 {truncateDescription(
                   getLocalizedContent('description') ||
                     `${t('common.discover')} ${getLocalizedContent('name')}`,
@@ -239,17 +234,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' })
                 <button
                   onClick={decreaseQuantity}
                   disabled={quantity <= 1}
-                  className="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 text-gray-700 flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-gray-100"
+                  className="w-7 h-7 rounded-full border border-[#d9a890] bg-white text-[#d9a890] flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-[#fdf9f7]"
                 >
                   −
                 </button>
- <span className="w-8 text-center font-medium text-[#c18c78]">
+                <span className="w-8 text-center font-medium text-[#d9a890]">
                   {quantity}
                 </span>
                 <button
                   onClick={increaseQuantity}
                   disabled={quantity >= 10}
-                  className="w-7 h-7 rounded-full border border-gray-200 bg-gray-50 text-gray-700 flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-gray-100"
+                  className="w-7 h-7 rounded-full border border-[#d9a890] bg-white text-[#d9a890] flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-[#fdf9f7]"
                 >
                   +
                 </button>
@@ -258,11 +253,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' })
                 onClick={addToCart}
                 className={`
                   flex items-center justify-center gap-1.5
-                  bg-gradient-to-r from-[#d9a890] to-[#c18c78] text-white
+                  bg-[#d9a890] text-white hover:opacity-90
                   px-3 py-2 rounded-full
                   font-medium text-sm
                   shadow-[0_4px_10px_rgba(217,168,144,0.3)]
-                  hover:from-[#c18c78] hover:to-[#b07a68] hover:shadow-[0_6px_14px_rgba(217,168,144,0.4)]
+                  hover:shadow-[0_6px_14px_rgba(217,168,144,0.4)]
                   active:scale-95 active:shadow-[0_2px_6px_rgba(217,168,144,0.35)]
                   transition-all duration-300
                   w-full
@@ -346,7 +341,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' })
           </h3>
         </div>
 
-        <p className="text-gray-600 text-sm mb-3 flex-grow line-clamp-3 leading-relaxed break-words">
+        <p className="text-gray-600 text-sm mb-3 flex-grow line-clamp-1 leading-relaxed break-words">
           {truncateDescription(
             getLocalizedContent('description') ||
               `${t('common.discover')} ${getLocalizedContent('name')}`,
@@ -367,41 +362,41 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' })
         {product.isAvailable && (
           <div className="space-y-3 mt-auto">
             <div className="flex items-center justify-center gap-2">
-              <button
-                onClick={decreaseQuantity}
-                disabled={quantity <= 1}
-                className="w-8 h-8 rounded-full border border-gray-200 bg-gray-50 text-gray-700 flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-gray-100"
-              >
-                −
-              </button>
- <span className="w-10 text-center font-medium text-[#c18c78]">
-                {quantity}
-              </span>
-              <button
-                onClick={increaseQuantity}
-                disabled={quantity >= 10}
-                className="w-8 h-8 rounded-full border border-gray-200 bg-gray-50 text-gray-700 flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-gray-100"
-              >
-                +
-              </button>
-            </div>
+                <button
+                  onClick={decreaseQuantity}
+                  disabled={quantity <= 1}
+                  className="w-8 h-8 rounded-full border border-[#d9a890] bg-white text-[#d9a890] flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-[#fdf9f7]"
+                >
+                  −
+                </button>
+                <span className="w-10 text-center font-medium text-[#d9a890]">
+                  {quantity}
+                </span>
+                <button
+                  onClick={increaseQuantity}
+                  disabled={quantity >= 10}
+                  className="w-8 h-8 rounded-full border border-[#d9a890] bg-white text-[#d9a890] flex items-center justify-center text-sm font-medium disabled:opacity-50 hover:bg-[#fdf9f7]"
+                >
+                  +
+                </button>
+              </div>
 
-            <button
-              onClick={addToCart}
-              className={`
+              <button
+                onClick={addToCart}
+                className={`
                 w-full flex items-center justify-center gap-2
-                bg-gradient-to-r from-[#d9a890] to-[#c18c78] text-white
+                bg-[#d9a890] text-white hover:opacity-90
                 py-3 rounded-full
                 font-semibold text-sm
                 shadow-[0_4px_10px_rgba(217,168,144,0.3)]
-                hover:from-[#c18c78] hover:to-[#b07a68] hover:shadow-[0_6px_14px_rgba(217,168,144,0.4)]
+                hover:shadow-[0_6px_14px_rgba(217,168,144,0.4)]
                 active:scale-95 active:shadow-[0_2px_6px_rgba(217,168,144,0.35)]
                 transition-all duration-300
               `}
-            >
-              <ShoppingCart className="w-4 h-4" />
-              <span>{t('addToCart')}</span>
-            </button>
+              >
+                <ShoppingCart className="w-4 h-4" />
+                <span>{t('addToCart')}</span>
+              </button>
           </div>
         )}
       </div>

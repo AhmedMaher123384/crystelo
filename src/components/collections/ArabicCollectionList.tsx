@@ -34,7 +34,7 @@ interface ArabicCollectionListProps {
 const normalize = (s: any) => (typeof s === 'string' ? s : '').trim().toLowerCase();
 
 const ArabicCollectionList: React.FC<ArabicCollectionListProps> = ({ arabicName, limit = 5, className }) => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isArabic = i18n.language === 'ar';
 
   const [loading, setLoading] = useState(true);
@@ -144,22 +144,23 @@ const ArabicCollectionList: React.FC<ArabicCollectionListProps> = ({ arabicName,
         <div>
           {/* زر عرض الكل أعلى القسم */}
           {collectionId && (
-            <div className={`mb-4 flex ${isArabic ? 'justify-end' : 'justify-start'}`}>
+            // استخدم justify-end دائمًا، ومع اتجاه الصفحة RTL للعربية سيظهر الزر يسارًا
+            <div className={"mb-4 flex justify-end"}>
               <Link
                 to={`/collection/${collectionId}`}
  className="inline-flex items-center gap-2 px-4 py-2 border border-[#c18c78] text-[#c18c78] rounded-md hover:bg-[#c18c78] hover:text-white transition-colors"
               >
-                <span>عرض الكل</span>
+                <span>{isArabic ? 'عرض الكل' : 'explore more'}</span>
                 <ArrowIcon className="w-4 h-4" />
               </Link>
             </div>
           )}
-          {/* عرض المنتجات جنب بعض بحجم أصغر */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {/* شبكة المنتجات — ارتفاع الصف تلقائي لمنع تداخل الكروت على الموبايل */}
+          <div className="grid auto-rows-auto grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6 items-start">
             {products.slice(0, displayLimit).map((product) => (
-              <div key={product.id} className="flex justify-center">
-                <div className="transform scale-[0.9] sm:scale-[0.95]">
-                  {/* استخدام ProductCard الأصلي (grid view) */}
+              <div key={product.id} className="w-full">
+                {/* استخدام ProductCard الأصلي (grid view) */}
+                <div className="w-full">
                   <ProductCard product={product} />
                 </div>
               </div>

@@ -144,7 +144,7 @@ const GlobalFooter: React.FC = () => {
         <button
           onClick={scrollToTop}
           className={`
-            fixed bottom-6 right-6 w-11 h-11
+            fixed bottom-6 left-6 w-11 h-11
             bg-white/90 backdrop-blur-sm
             text-${PRIMARY_DARK}
             rounded-full

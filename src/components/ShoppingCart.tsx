@@ -188,7 +188,7 @@ const ShoppingCart: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 to="/products"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#592a26] text-white font-bold rounded-xl hover:bg-[#4a221f] min-w-[200px]"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#d9a890] text-white font-bold rounded-xl hover:opacity-90 min-w-[200px]"
               >
                 استكشف المنتجات
               </Link>
@@ -276,7 +276,7 @@ const ShoppingCart: React.FC = () => {
                           </span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="w-10 h-10 rounded-lg bg-[#592a26] text-white hover:bg-[#4a221f] flex items-center justify-center"
+                            className="w-10 h-10 rounded-lg bg-[#d9a890] text-white hover:opacity-90 flex items-center justify-center"
                           >
                             <Plus className="w-5 h-5" />
                           </button>
@@ -284,7 +284,7 @@ const ShoppingCart: React.FC = () => {
 
                         <button
                           onClick={proceedToCheckout}
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-[#592a26] text-white font-bold rounded-xl hover:bg-[#0A2A55]/90"
+                          className="inline-flex items-center gap-2 px-6 py-3 bg-[#d9a890] text-white font-bold rounded-xl hover:opacity-90"
                         >
                           <span>إتمام الطلب</span>
                           <ArrowLeft className="w-5 h-5" />
@@ -318,7 +318,7 @@ const ShoppingCart: React.FC = () => {
                   </div>
                   <button
                     onClick={proceedToCheckout}
-                    className="w-full mt-6 py-4 bg-[#592a26] text-white font-bold rounded-xl hover:bg-[#4a221f] transition-colors"
+                    className="w-full mt-6 py-4 bg-[#d9a890] text-white font-bold rounded-xl hover:opacity-90 transition-colors"
                   >
                     إتمام الطلب
                   </button>

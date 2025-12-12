@@ -35,6 +35,8 @@ interface CartItem {
 interface Category {
   id: number;
   name: string;
+  name_ar?: string;
+  name_en?: string;
   description: string;
   image: string;
 }
@@ -151,6 +153,20 @@ function Navbar() {
         }, delay - (currentTime - lastExecTime));
       }
     };
+  };
+
+  // Helper: localized text (supports name/name_ar/name_en)
+  const getLocalized = (item: any, field: string) => {
+    const lang = i18n.language === 'ar' ? 'ar' : 'en';
+    const other = lang === 'ar' ? 'en' : 'ar';
+    const langField = `${field}_${lang}`;
+    const otherField = `${field}_${other}`;
+    const langValue = item?.[langField];
+    const otherValue = item?.[otherField];
+    if (typeof langValue === 'string' && langValue.trim()) return langValue;
+    if (typeof otherValue === 'string' && otherValue.trim()) return otherValue;
+    const base = item?.[field];
+    return typeof base === 'string' ? base : '';
   };
 
   useEffect(() => {
@@ -592,6 +608,7 @@ function Navbar() {
                 <div className="w-full max-w-2xl mx-auto">
                   <LiveSearch
                     triggerVariant="bar"
+                    appearance="light"
                     onClose={() => setIsSearchOpen(false)}
                   />
                 </div>
@@ -652,11 +669,19 @@ function Navbar() {
               </div>
             </div>
             <div className="flex-1 overflow-y-auto p-4 space-y-5">
+              {/* Language & Currency */}
+              <div className="space-y-2">
+                <div className="text-xs font-semibold text-[#d9a890]">اللغة والعملة</div>
+                <div className="relative bg-white border border-[#d9a890]/30 rounded-xl shadow-sm px-2 py-2">
+                  <LanguageCurrencySelector />
+                </div>
+              </div>
+
               {/* Inline Search Bar */}
               <div className="space-y-2">
-                <div className="text-xs font-semibold text-gray-700">البحث</div>
-                <div className="relative bg-white border border-gray-200 rounded-xl shadow-sm px-2 py-2">
-                  <LiveSearch triggerVariant="bar" onClose={() => {}} />
+                <div className="text-xs font-semibold text-[#d9a890]">البحث</div>
+                <div className="relative bg-white border border-[#d9a890]/30 rounded-xl shadow-sm px-2 py-2">
+                  <LiveSearch triggerVariant="bar" appearance="light" onClose={() => {}} />
                 </div>
               </div>
               {user ? (
@@ -727,11 +752,11 @@ function Navbar() {
                     categories.slice(0, 12).map((cat) => (
                       <Link
                         key={cat.id}
-                        to={`/category/${createCategorySlug(cat.id, cat.name)}`}
+                        to={`/category/${createCategorySlug(cat.id, getLocalized(cat, 'name') || cat.name)}`}
                         onClick={() => setIsMenuOpen(false)}
                         className="px-3 py-2 rounded-xl bg-white border border-gray-200 text-gray-800 text-xs font-medium hover:border-[#c18c78]/40 hover:bg-[#d9a890]/10 truncate"
                       >
-                        {cat.name}
+                        {getLocalized(cat, 'name') || cat.name}
                       </Link>
                     ))
                   ) : (
