@@ -263,7 +263,7 @@ const AboutUsSection: React.FC = () => {
                 key={category.id} 
                 className={`animate-fade-in-up animate-delay-${(idx % 5) + 1}`}
               >
-                <div className={`flex items-end justify-between mb-4 ${isArabic ? 'flex-row-reverse' : ''}`}>
+                <div className="flex items-end justify-between mb-4">
                   <h3 className="text-xl md:text-2xl font-extrabold text-black">{name}</h3>
                   <Link 
                     to={to} 

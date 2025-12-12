@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import logo from "../../assets/logo.png";
+import tabby from "../../assets/tabby.png";
 
 // اللون الأساسي — بطل التصميم
 const PRIMARY = '#d9a890';
@@ -112,6 +113,7 @@ const GlobalFooter: React.FC = () => {
                   { name: 'Apple Pay', src: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg' },
                   { name: 'Mada', src: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Mada_Logo.svg' },
                   { name: 'Tamara', src: 'https://cdn.prod.website-files.com/67c184892f7a84b971ff49d9/68931b49f2808979578bdc64_tamara-text-logo-black-en.svg' },
+                  { name: 'Tabby', src: tabby },
                 ].map((method, i) => (
                   <div
                     key={i}
@@ -120,7 +122,7 @@ const GlobalFooter: React.FC = () => {
                     <img
                       src={method.src}
                       alt={method.name}
-                      className="h-4 w-auto object-contain"
+                      className={(method.name === 'Tabby') ? 'h-6 w-auto object-contain' : 'h-4 w-auto object-contain'}
                       loading="lazy"
                     />
                   </div>
