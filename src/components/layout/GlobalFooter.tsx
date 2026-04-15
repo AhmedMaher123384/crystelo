@@ -107,38 +107,56 @@ const GlobalFooter: React.FC = () => {
             <div>
               <h4 className="text-white font-semibold text-sm mb-4">طرق الدفع</h4>
               <div className="flex flex-wrap items-center gap-2.5">
-                {[
-                  { name: 'Visa', src: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg' },
-                  { name: 'Mastercard', src: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg' },
-                  { name: 'Apple Pay', src: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg' },
-                  { name: 'Mada', src: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Mada_Logo.svg' },
-                  { name: 'Tamara', src: 'https://cdn.prod.website-files.com/67c184892f7a84b971ff49d9/68931b49f2808979578bdc64_tamara-text-logo-black-en.svg' },
-                  { name: 'Tabby', src: tabby },
-                ].map((method, i) => (
-                  <div
-                    key={i}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 px-2.5 py-1.5 h-10 flex items-center justify-center min-w-[60px]"
-                  >
-                    <img
-                      src={method.src}
-                      alt={method.name}
-                      className={(method.name === 'Tabby') ? 'h-6 w-auto object-contain' : 'h-4 w-auto object-contain'}
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
+               {[
+  { name: 'Visa', src: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Visa_Inc._logo_%282021%E2%80%93present%29.svg' },
+  { name: 'Mastercard', src: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg' },
+  { name: 'Apple Pay', src: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg' },
+  { name: 'Mada', src: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Mada_Logo.svg' },
+  { name: 'Tamara', src: 'https://cdn.prod.website-files.com/67c184892f7a84b971ff49d9/68931b49f2808979578bdc64_tamara-text-logo-black-en.svg' },
+  { name: 'Tabby', src: tabby },
+].map((method, i) => (
+  <div
+    key={i}
+    className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 px-2.5 py-1.5 h-10 flex items-center justify-center min-w-[60px]"
+  >
+    <img
+      src={method.src}
+      alt={method.name}
+      className={`${method.name === 'Tabby' ? 'h-6' : 'h-4'} w-auto object-contain`}
+      loading="lazy"
+    />
+  </div> 
+))}
               </div>
             </div>
 
           </div>
 
           {/* --- حقوق النشر — نظيف، من غير "AfterAds" في الوصف === */}
-          <div className="border-t border-white/15 mt-8 pt-6 text-center">
-            <p className="text-white/60 text-sm">
-              &copy; {new Date().getFullYear()} جميع الحقوق محفوظة
-            </p>
-          </div>
+         <div className="border-t border-white/15 mt-8 pt-6">
+  <div className="flex justify-between items-center flex-wrap gap-4">
+    
+    {/* حقوق النشر */}
+    <p className="text-white/60 text-sm">
+      &copy; {new Date().getFullYear()} جميع الحقوق محفوظة
+    </p>
+
+    {/* CREATED BY */}
+    <a
+      href="https://ufuq-digital.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-[10px] tracking-wider border border-white/20 px-3 py-1.5 rounded-full 
+                 text-white/60 hover:text-white/80 hover:border-white/40 
+                 transition-all duration-300"
+    >
+      CREATED BY UFUQ-DIGITAL
+    </a>
+
+  </div>
+</div>
         </div>
+       
       </footer>
 
       {/* === زر التمرير — بسيط، بلون #d9a890 === */}
